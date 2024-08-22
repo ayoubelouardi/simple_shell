@@ -1,6 +1,12 @@
 # Shell
 
 
+# Requirements
+-  `gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh`
+- Betty style.
+- No memory leaks
+- No more than 5 functions per file
+
 #  1. Simple shell 0.1 
 
     Usage: simple_shell
