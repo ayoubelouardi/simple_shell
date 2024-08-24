@@ -61,18 +61,18 @@ int main(void)
 			exit(1);
 		}
 
-		if (my_string[byte_size] == '\n')
-			my_string[byte_size] = '\0';
+		if (my_string[byte_size - 1] == '\n')
+			my_string[byte_size - 1] = '\0';
 
-		args[1] = my_string;
-		args[2] = NULL;
+		args[0] = my_string;
+		args[1] = NULL;
 
 		pid = fork();
 		if (pid == -1)
 		{
 			perror("fork failed");
 			exit(1);
-		} else if (pid == 1)
+		} else if (pid == 0)
 		{
 			execve(args[0], args, environ);
 		} else
@@ -81,6 +81,7 @@ int main(void)
 
 			wait(&status);
 		}
+		free(my_string);
 	}
 
 	return (0);
