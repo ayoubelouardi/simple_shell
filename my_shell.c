@@ -18,11 +18,15 @@
 
 #define MAX_BUF_SIZE 100
 
+extern char **environ;
+
 int main(void)
 {
 	size_t byte_size = 0;
 	size_t buffer_size = 0;
 	char *my_string;
+	char *args[2];
+	pid_t pid;
 
 	/**
 	 * while true
@@ -56,7 +60,27 @@ int main(void)
 			my_puts("\n");
 			exit(1);
 		}
-		free(my_string);
+
+		if (my_string[byte_size] == '\n')
+			my_string[byte_size] = '\0';
+
+		args[1] = my_string;
+		args[2] = NULL;
+
+		pid = fork();
+		if (pid == -1)
+		{
+			perror("fork failed");
+			exit(1);
+		} else if (pid == 1)
+		{
+			execve(args[0], args, environ);
+		} else
+		{
+			int status;
+
+			wait(&status);
+		}
 	}
 
 	return (0);
