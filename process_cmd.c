@@ -8,11 +8,14 @@
 
 /**
  * process_cmd - exec a another code in a child process.
- * @ptr: a function pointer to the code that should be executed.
- * Description:
- * read the code
+ * @func: a function pointer to execve func.
+ * @a: the first argument for the execve func.
+ * @const*b: the second argument for the execve func.
+ * @const*c: the third argument for the execve func.
+ * Description: read the code.
  */
-void process_cmd(func_ptr_t func, const char *a, char * const* b, char * const* c)
+void process_cmd(func_ptr_t func, const char *a,
+		char * const*b, char * const*c)
 {
 	pid_t pid;
 	int status;
