@@ -26,26 +26,6 @@ int main(void)
 	char **args;
 	pid_t pid;
 
-	/**
-	 * while true
-	 *	1. puts("$ ");
-	 *	2.1. allocate the buffer
-	 *	2.2. take input using getline();
-	 *	2.3. make a function to tokenie the input
-	 *	3. check for exit. ^D
-	 *	-----------------
-	 *	4. excute the input
-	 *		4.1. fork
-	 *		4.2. execve
-	 *		4.3. wait
-	 *		4.4 if is child
-	 *			exerve()
-	 *		4.5 else if
-	 *			wait();
-	 *		4.6 else
-	 *			error();
-	 */
-
 	while (1)
 	{
 		my_puts("$ ");
