@@ -13,12 +13,10 @@
  * main - Simple UNIX Shell
  * Description:
  * Read /README.md
- * Return: 
+ * Return: 0 on success
  */
 
 #define MAX_BUF_SIZE 100
-
-extern char **environ;
 
 int main(void)
 {
@@ -37,8 +35,8 @@ int main(void)
 	 *	3. check for exit. ^D
 	 *	-----------------
 	 *	4. excute the input
-	 *		4.1. fork 
-	 *		4.2. execve 
+	 *		4.1. fork
+	 *		4.2. execve
 	 *		4.3. wait
 	 *		4.4 if is child
 	 *			exerve()
