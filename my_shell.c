@@ -25,7 +25,7 @@ int main(void)
 	size_t byte_size = 0;
 	size_t buffer_size = 0;
 	char *my_string;
-	char *args[2];
+	char **args;
 	pid_t pid;
 
 	/**
@@ -64,8 +64,7 @@ int main(void)
 		if (my_string[byte_size - 1] == '\n')
 			my_string[byte_size - 1] = '\0';
 
-		args[0] = my_string;
-		args[1] = NULL;
+		args = tokenize(my_string);
 
 		pid = fork();
 		if (pid == -1)
@@ -75,6 +74,8 @@ int main(void)
 		} else if (pid == 0)
 		{
 			execve(args[0], args, environ);
+			perror("execve failed");
+			exit(1);
 		} else
 		{
 			int status;
