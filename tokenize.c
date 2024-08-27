@@ -6,7 +6,7 @@
 
 /**
  * tokenize - splits a string into an array of string
- * str: string to be split
+ * @str: string to be split
  *
  * Return: array of strings
  */
