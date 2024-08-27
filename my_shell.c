@@ -16,7 +16,6 @@
  * Return: 0 on success
  */
 
-#define MAX_BUF_SIZE 100
 
 int main(void)
 {

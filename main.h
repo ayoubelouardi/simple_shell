@@ -1,6 +1,8 @@
 #ifndef MY_SHELL_H
 #define MY_SHELL_H
 
+#define MAX_BUF_SIZE 100
+
 /**
  * func_ptr_t - a function pointer type
  * Description: a type for a pointer to the function execve
