@@ -1,7 +1,7 @@
 #ifndef MY_SHELL_H
 #define MY_SHELL_H
 
-#define MAX_BUF_SIZE 100
+#define MAX_BUF_SIZE 500
 
 /**
  * func_ptr_t - a function pointer type
