@@ -11,7 +11,7 @@
  */
 char *join_strings(char *str1, char* str2)
 {
-	char *buffer;
+	char *buffer = "string";
 	int s1 = _strlen(str1);
 	int s2 = _strlen(str2);
 
@@ -21,4 +21,5 @@ char *join_strings(char *str1, char* str2)
 		buffer = _strncat(buffer, str2, s2);
 		return (buffer);
 	}
+	return ("error: join_strings doesn't accept NULL");
 }
