@@ -3,9 +3,9 @@
 
 /**
  * func_ptr_t - a function pointer type
+ * Description: a type for a pointer to the function execve
  */
 typedef int (*func_ptr_t)(const char *, char * const*, char * const*);
-
 
 extern char **environ;
 
