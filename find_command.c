@@ -13,22 +13,15 @@ char *find_command(char *command)
 {
 	char *path = my_getenv("PATH");
 	char *dir;
-	char fullpath[MAX_BUF_SIZE];
+	char fullpath = malloc(sizeof(char) * 250);
 	size_t dir_len, cmd_len;
 
 	if (path == NULL)
 		return (NULL);
 
-	path = strdup(path);
-	if (path == NULL)
-	{
-		perror("strdup failed");
-		return (NULL);
-	}
-
 	while (command[cmd_len] != '\0')
 		cmd_len++;
-	
+
 	dir = strtok(path, ":");
 	while (dir != NULL)
 	{
