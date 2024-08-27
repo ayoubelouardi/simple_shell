@@ -19,6 +19,6 @@ void process_cmd(func_ptr_t func, const char *, char * const*, char * const*);
 char *join_strings(char *str1, char* str2);
 char *_strncat(char *dest, char *src, int n);
 char *_strncpy(char *dest, char *src, int n);
-size_t _strlen(char *str);
+int _strlen(char *str);
 
 #endif

@@ -7,7 +7,7 @@
  * Description: calculate the string len
  * Return: the len
  */
-size_t _strlen(char *str)
+int _strlen(char *str)
 {
 	size_t i;
 
