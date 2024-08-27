@@ -1,7 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include <string.h>
 #include "main.h"
+#include <sys/stat.h>
+
 
 /**
  * find_command - searches for a command in the path
@@ -11,21 +14,41 @@
  */
 char *find_command(char *command)
 {
-	char *path = my_getenv("PATH");
+	struct stat st;
+	char *path = _getenv("PATH");
 	char *dir;
-	char fullpath = malloc(sizeof(char) * 250);
-	size_t dir_len, cmd_len;
+	char *fullpath = malloc(sizeof(char) * MAX_BUF_SIZE);
+	size_t dir_len, cmd_len, t_len, dir_max = 0;
 
+
+	cmd_len = _strlen(command);
 	if (path == NULL)
 		return (NULL);
 
-	while (command[cmd_len] != '\0')
-		cmd_len++;
 
 	dir = strtok(path, ":");
 	while (dir != NULL)
 	{
-		while (dir[dir_len] != '\0')
-			dir_len++;
+		dir_len = _strlen(dir);
+		if (dir_max < dir_len)
+			dir_max = dir_len;
 	}
+
+	t_len = cmd_len + dir_len + 1;
+	if (t_len > MAX_BUF_SIZE)
+	{
+		return ("error: buffer size if not enogh!");
+	}
+
+	dir = strtok(path, ":");
+	while (dir != NULL)
+	{
+		fullpath = join_strings(dir, command);
+		if (stat(fullpath, &st) == 0)
+		{
+			return (fullpath);
+		}
+		strtok(NULL, ":");
+	}
+	return ("error: we didn't find the file");
 }
