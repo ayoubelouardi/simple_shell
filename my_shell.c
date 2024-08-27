@@ -24,7 +24,6 @@ int main(void)
 	size_t buffer_size = 0;
 	char *my_string;
 	char **args;
-	pid_t pid;
 
 	while (1)
 	{
@@ -44,22 +43,7 @@ int main(void)
 
 		args = tokenize(my_string);
 
-		pid = fork();
-		if (pid == -1)
-		{
-			perror("fork failed");
-			exit(1);
-		} else if (pid == 0)
-		{
-			execve(args[0], args, environ);
-			perror("execve failed");
-			exit(1);
-		} else
-		{
-			int status;
-
-			wait(&status);
-		}
+		process_cmd(execve, args[0], args, environ);
 		free(my_string);
 	}
 

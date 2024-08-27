@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include "main.h"
 
 
 /**
@@ -11,7 +12,7 @@
  * Description:
  * read the code
  */
-void process_cmd(int (*ptr)(void))
+void process_cmd(func_ptr_t func, const char *a, char * const* b, char * const* c)
 {
         pid_t pid;
         int status;
@@ -26,7 +27,7 @@ void process_cmd(int (*ptr)(void))
         else if (pid == 0)
         {
                 /* actually execute code */
-                if ((*ptr)() == -1)
+                if (func(a, b, c) == -1)
                 {
                         perror("error in execve(): \n");
                         exit(12);
