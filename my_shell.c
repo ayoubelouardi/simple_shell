@@ -45,7 +45,7 @@ int main(void)
 
 		command = find_command(args[0]);
 		args[0] = command;
-
+		printf("%s\n", args[0]);
 		process_cmd(execve, args[0], args, environ);
 		free(my_string);
 	}

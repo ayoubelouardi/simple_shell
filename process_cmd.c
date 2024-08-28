@@ -24,7 +24,7 @@ void process_cmd(func_ptr_t func, const char *a,
 
 	if (pid == -1)
 	{
-		perror("error in fork(): \n");
+		perror("error in fork():");
 		exit(11);
 	}
 	else if (pid == 0)
@@ -32,7 +32,7 @@ void process_cmd(func_ptr_t func, const char *a,
 		/* actually execute code */
 		if (func(a, b, c) == -1)
 		{
-			perror("error in execve(): \n");
+			perror("error in execve():");
 			exit(12);
 		}
 	}

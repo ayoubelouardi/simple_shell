@@ -17,39 +17,42 @@ char *find_command(char *command)
 	struct stat st;
 	char *path = _getenv("PATH");
 	char *dir;
-	char *fullpath = malloc(sizeof(char) * MAX_BUF_SIZE);
-	size_t dir_len, cmd_len, t_len, dir_max = 0;
+	char *path_copy;
+	char *fullpath = malloc(sizeof(char) * 250);
 
-
-	cmd_len = _strlen(command);
-	if (path == NULL)
+	if (path == NULL || command == NULL)
 		return (NULL);
 
+	path_copy = malloc(sizeof(char) * _strlen(path) + 1);
+	if (path_copy == NULL)
+		return (NULL);
+	_strncpy(path_copy, path, _strlen(path) + 1);
+
 
 	dir = strtok(path, ":");
 	while (dir != NULL)
 	{
-		dir_len = _strlen(dir);
-		if (dir_max < dir_len)
-			dir_max = dir_len;
-	}
+		_strncpy(fullpath, dir, _strlen(dir));
+		_strncat(fullpath, "/", 1);
+		_strncat(fullpath, command, _strlen(command));
 
-	t_len = cmd_len + dir_len + 1;
-	if (t_len > MAX_BUF_SIZE)
-	{
-		return ("error: buffer size if not enogh!");
-	}
-
-	dir = strtok(path, ":");
-	while (dir != NULL)
-	{
-		fullpath = join_strings(dir, "/");
-		fullpath = join_strings(fullpath, command);
-		if (stat(fullpath, &st) == 0)
+		if (fullpath == NULL)
 		{
+			free(path_copy);
+			return (NULL);
+		}
+
+		if (stat(fullpath, &st))
+		{
+			free(path_copy);
 			return (fullpath);
 		}
-		dir = strtok(NULL, ":");
+
+		free(fullpath);
+		strtok(NULL, ":");
 	}
-	return ("error: we didn't find the file");
+
+	free(path_copy);
+	return (NULL);
 }
+
