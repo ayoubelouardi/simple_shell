@@ -43,12 +43,13 @@ char *find_command(char *command)
 	dir = strtok(path, ":");
 	while (dir != NULL)
 	{
-		fullpath = join_strings(dir, command);
+		fullpath = join_strings(dir, "/");
+		fullpath = join_strings(fullpath, command);
 		if (stat(fullpath, &st) == 0)
 		{
 			return (fullpath);
 		}
-		strtok(NULL, ":");
+		dir = strtok(NULL, ":");
 	}
 	return ("error: we didn't find the file");
 }

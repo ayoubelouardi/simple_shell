@@ -23,6 +23,7 @@ int main(void)
 	size_t buffer_size = 0;
 	char *my_string;
 	char **args;
+	char *command;
 
 	while (1)
 	{
@@ -41,6 +42,9 @@ int main(void)
 			my_string[byte_size - 1] = '\0';
 
 		args = tokenize(my_string);
+
+		command = find_command(args[0]);
+		args[0] = command;
 
 		process_cmd(execve, args[0], args, environ);
 		free(my_string);
