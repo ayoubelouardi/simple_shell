@@ -41,11 +41,15 @@ int main(void)
 		if (my_string[byte_size - 1] == '\n')
 			my_string[byte_size - 1] = '\0';
 
+		if (_strcmp(my_string, "exit") == 0)
+		{
+			free(my_string);
+			exit(1);
+		}
 		args = tokenize(my_string);
 
 		command = find_command(args[0]);
 		args[0] = command;
-		printf("%s\n", args[0]);
 		process_cmd(execve, args[0], args, environ);
 		free(my_string);
 	}

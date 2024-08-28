@@ -5,12 +5,11 @@
 #include "main.h"
 #include <sys/stat.h>
 
-
 /**
- * find_command - searches for a command in the path
+ * find_command - searches for a command in the PATH
  * @command: command to search for
  *
- * Return: the full path to the command
+ * Return: the full path to the command, or NULL if not found
  */
 char *find_command(char *command)
 {
@@ -18,43 +17,37 @@ char *find_command(char *command)
 	char *path = _getenv("PATH");
 	char *dir;
 	char *path_copy;
-	char *fullpath = malloc(sizeof(char) * 250);
+	char *fullpath = malloc(250);
 
-	if (path == NULL || command == NULL)
+	if (path == NULL || command == NULL || fullpath == NULL)
 		return (NULL);
 
-	if (fullpath == NULL)
-		return (NULL);
-
-	path_copy = malloc(sizeof(char) * _strlen(path) + 1);
+	path_copy = malloc(_strlen(path) + 1);
 	if (path_copy == NULL)
+	{
+		free(fullpath);
 		return (NULL);
-	_strncpy(path_copy, path, _strlen(path) + 1);
-
+	}
+	_strncpy(path_copy, path);
 
 	dir = strtok(path_copy, ":");
 	while (dir != NULL)
 	{
-		_strncpy(fullpath, dir, _strlen(dir) + 1);
-		_strncat(fullpath, "/", 1);
-		_strncat(fullpath, command, _strlen(command));
+		_strncpy(fullpath, dir);
+		_strncat(fullpath, "/");
+		_strncat(fullpath, command);
 
-		if (fullpath == NULL)
-		{
-			free(path_copy);
-			return (NULL);
-		}
+	if (stat(fullpath, &st) == 0)
+	{
+		free(path_copy);
+		return (fullpath);
+	}
 
-		if (stat(fullpath, &st) == 0)
-		{
-			free(path_copy);
-			return (fullpath);
-		}
-
-		dir = strtok(NULL, ":");
+	dir = strtok(NULL, ":");
 	}
 
 	free(path_copy);
+	free(fullpath);
 	return (NULL);
 }
 

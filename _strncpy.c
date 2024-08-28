@@ -8,15 +8,15 @@
  *
  * Return:pointer to dest
  */
-char *_strncpy(char *dest, char *src, int n)
+char *_strncpy(char *dest, char *src)
 {
-	int i;
-	char *dest_start = dest;
+	char *ptr = dest;
 
-	for (i = 0; i < n; i++)
+	while (*src != '\0')
 	{
-		*dest++ = *src++;
+		*ptr++ = *src++;
 	}
+	*ptr = '\0';
 
-	return (dest_start);
+	return (dest);
 }

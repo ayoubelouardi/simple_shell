@@ -12,13 +12,11 @@
 char *join_strings(char *str1, char* str2)
 {
 	char *buffer = "string";
-	int s1 = _strlen(str1);
-	int s2 = _strlen(str2);
 
 	if (str1 != NULL && str2 != NULL)
 	{
-		buffer = _strncpy(buffer, str1, s1);
-		buffer = _strncat(buffer, str2, s2);
+		buffer = _strncpy(buffer, str1);
+		buffer = _strncat(buffer, str2);
 		return (buffer);
 	}
 	return ("error: join_strings doesn't accept NULL");

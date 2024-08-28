@@ -8,17 +8,15 @@
  *
  * Return: pointer to dest
  */
-char *_strncat(char *dest, char *src, int n)
+char *_strncat(char *dest, char *src)
 {
-	int i;
-	char *dest_start = dest;
+	char *ptr = dest + _strlen(dest);
 
-	while (*dest != '\0')
-		dest++;
-	for (i = n; i > 0; i--)
+	while (*src != '\0')
 	{
-		*dest++ = *src++;
+		*ptr++ = *src++;
 	}
+	*ptr = '\0';
 
-	return (dest_start);
+	return (dest);
 }
