@@ -23,16 +23,19 @@ char *find_command(char *command)
 	if (path == NULL || command == NULL)
 		return (NULL);
 
+	if (fullpath == NULL)
+		return (NULL);
+
 	path_copy = malloc(sizeof(char) * _strlen(path) + 1);
 	if (path_copy == NULL)
 		return (NULL);
 	_strncpy(path_copy, path, _strlen(path) + 1);
 
 
-	dir = strtok(path, ":");
+	dir = strtok(path_copy, ":");
 	while (dir != NULL)
 	{
-		_strncpy(fullpath, dir, _strlen(dir));
+		_strncpy(fullpath, dir, _strlen(dir) + 1);
 		_strncat(fullpath, "/", 1);
 		_strncat(fullpath, command, _strlen(command));
 
@@ -42,14 +45,13 @@ char *find_command(char *command)
 			return (NULL);
 		}
 
-		if (stat(fullpath, &st))
+		if (stat(fullpath, &st) == 0)
 		{
 			free(path_copy);
 			return (fullpath);
 		}
 
-		free(fullpath);
-		strtok(NULL, ":");
+		dir = strtok(NULL, ":");
 	}
 
 	free(path_copy);
