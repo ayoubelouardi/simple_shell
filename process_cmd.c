@@ -19,36 +19,40 @@
  * 11: fork() faild.
  * 12: execve() faild.
  * 13: wait() faild.
+ * 14: if a is NULL.
  */
 int process_cmd(func_ptr_t func, const char *a,
 		char * const *b, char * const *c)
 {
-	pid_t pid;
-	int status;
-
-	pid = fork();
-
-	if (pid == -1)
+	if (a != NULL)
 	{
-		perror("error in fork():");
-		return (11);
-	}
-	else if (pid == 0)
-	{
-		/* actually execute code */
-		if (func(a, b, c) == -1)
+		pid_t pid;
+		int status;
+
+		pid = fork();
+
+		if (pid == -1)
 		{
-			perror("error in execve():");
-			return (12);
+			perror("error in fork():");
+			return (11);
+		}
+		else if (pid == 0)
+		{
+			/* actually execute code */
+			if (func(a, b, c) == -1)
+			{
+				perror("error in execve():");
+				return (12);
+			}
+		}
+		else
+		{
+			if (wait(&status) == -1)
+			{
+				perror("the child have some error\n");
+				return (13);
+			}
 		}
 	}
-	else
-	{
-		if (wait(&status) == -1)
-		{
-			perror("the child have some error\n");
-			return (13);
-		}
-	}
+	return (14);
 }
-

@@ -8,7 +8,7 @@
  *
  * Return: the input buffer
  */
-char *_input()
+char *_input(void)
 {
 	char *buff = NULL;
 	size_t bufsize = 0;
