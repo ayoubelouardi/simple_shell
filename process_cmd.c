@@ -13,8 +13,14 @@
  * @b: the second argument for the execve func.
  * @c: the third argument for the execve func.
  * Description: read the code.
+ * Return:
+ * 0 on success
+ * otherwise it will return the convinient error code:
+ * 11: fork() faild.
+ * 12: execve() faild.
+ * 13: wait() faild.
  */
-void process_cmd(func_ptr_t func, const char *a,
+int process_cmd(func_ptr_t func, const char *a,
 		char * const *b, char * const *c)
 {
 	pid_t pid;
@@ -25,7 +31,7 @@ void process_cmd(func_ptr_t func, const char *a,
 	if (pid == -1)
 	{
 		perror("error in fork():");
-		exit(11);
+		return (11);
 	}
 	else if (pid == 0)
 	{
@@ -33,7 +39,7 @@ void process_cmd(func_ptr_t func, const char *a,
 		if (func(a, b, c) == -1)
 		{
 			perror("error in execve():");
-			exit(12);
+			return (12);
 		}
 	}
 	else
@@ -41,7 +47,7 @@ void process_cmd(func_ptr_t func, const char *a,
 		if (wait(&status) == -1)
 		{
 			perror("the child have some error\n");
-			exit(13);
+			return (13);
 		}
 	}
 }

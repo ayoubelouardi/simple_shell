@@ -24,7 +24,7 @@ extern char **environ;
 /* prototype of functions */
 int my_puts(char *str);
 int _strlen(char *str);
-void process_cmd(func_ptr_t func, const char *, char * const*, char * const*);
+int process_cmd(func_ptr_t func, const char *, char * const*, char * const*);
 
 
 #endif

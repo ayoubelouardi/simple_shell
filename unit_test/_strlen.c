@@ -1,4 +1,3 @@
-#include <stdlib.h>
 #include <stddef.h>
 #include "main.h"
 
@@ -7,14 +6,18 @@
  * @str: string
  * Description: calculate the string len
  * Return: the len
+ * or -1 if str is NULL
  */
 int _strlen(char *str)
 {
-        int i = 0;
+	if (str != NULL)
+	{
+		int i = 0;
 
-        while (str[i] != '\0')
-                i++;
+		while (str[i] != '\0')
+			i++;
 
-        return (i);
+		return (i);
+	}
+	return (-1);
 }
-
