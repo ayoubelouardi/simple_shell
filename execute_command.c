@@ -50,9 +50,7 @@ void execute_command(char *buffer)
 	}
 	else
 	{
-		do {
-			waitpid(pid, &status, WUNTRACED);
-		} while (!WIFEXITED(status) && !WIFSIGNALED(status));
+		wait(&status);
 	}
 	if (command_path != argv[0])
 		free(command_path);
