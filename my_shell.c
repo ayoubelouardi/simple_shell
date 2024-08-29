@@ -18,14 +18,9 @@ int main(void)
 		bytes_read = getline(&buffer, &bufsize, stdin);
 		if (bytes_read == -1)
 		{
-			if (feof(stdin))
-			{
-				write(1, "\n", 1);
-				free(buffer);
-				exit(0);
-			}
-			perror("getline");
-			continue;
+			write(1, "\n", 1);
+			free(buffer);
+			exit(0);
 		}
 
 		if (buffer[bytes_read - 1] == '\n')
