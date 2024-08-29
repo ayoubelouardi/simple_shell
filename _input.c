@@ -17,6 +17,7 @@ char *_input(void)
 	bytes_read = getline(&buff, &bufsize, stdin);
 	if (bytes_read == -1)
 	{
+		my_puts("\n");
 		free(buff);
 		exit(1);
 	}

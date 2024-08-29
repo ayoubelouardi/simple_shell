@@ -29,7 +29,7 @@ int main(void)
 		user_input = _input();
 
 		/* process the command */
-		process_cmd(execve, user_input, NULL, NULL);
+		process_cmd(execve, user_input, NULL, environ);
 		free(user_input);
 
 	}
