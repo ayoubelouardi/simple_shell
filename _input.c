@@ -23,7 +23,7 @@ char *_input(void)
 
 	if (buff[bytes_read - 1] == '\n')
 		buff[bytes_read - 1] = '\0';
-	
+
 	return (buff);
 }
 

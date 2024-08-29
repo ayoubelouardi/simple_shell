@@ -6,7 +6,7 @@
 - No memory leaks
 - No more than 5 functions per file
 
-#  1. Simple shell 0.1 
+#  1. Simple shell 0.1
 
     Usage: simple_shell
 
