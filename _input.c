@@ -17,9 +17,8 @@ char *_input(void)
 	bytes_read = getline(&buff, &bufsize, stdin);
 	if (bytes_read == -1)
 	{
-		perror("getline failed");
 		free(buff);
-		return (NULL);
+		exit(1);
 	}
 
 	if (buff[bytes_read - 1] == '\n')
