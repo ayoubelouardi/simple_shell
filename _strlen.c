@@ -10,7 +10,7 @@
  */
 int _strlen(char *str)
 {
-	if (str != NULL)
+	if (str == NULL)
 		return (-1);
 
 	int i = 0;
