@@ -8,7 +8,8 @@
  */
 void execute_command(char *buffer)
 {
-	char *argv[MAX_BUF_SIZE], command_path;
+	char *argv[MAX_BUF_SIZE];
+	char *command_path;
 	pid_t pid;
 	int status, i = 0;
 
