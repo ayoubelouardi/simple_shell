@@ -1,21 +1,20 @@
-#include <stddef.h>
 #include "main.h"
 
 /**
- * _strlen - string len
- * @str: string
- * Description: calculate the string len
- * Return: the len
- * or -1 if str is NULL
+ * _strlen - Custom function to get the length of a string.
+ * @s: The string.
+ *
+ * Return: The length of the string.
  */
-int _strlen(char *str)
+int _strlen(const char *s)
 {
-	int i;
+	int len = 0;
 
-	if (str == NULL)
-		return (-1);
+	while (s[len] != '\0')
+	{
+		len++;
+	}
 
-	for (i = 0; str[i] != '\0'; i++)
-		;
-	return (i);
+	return (len);
 }
+

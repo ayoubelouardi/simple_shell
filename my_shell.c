@@ -1,38 +1,51 @@
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/stat.h>
-#include <sys/wait.h>
-#include <signal.h>
-#include <sys/types.h>
-#include <dirent.h>
 #include "main.h"
 
-
 /**
- * main - Simple UNIX Shell
- * Description:
- * Read /README.md
- * Return: 0 on success
+ * main - A simple UNIX command-line interpreter
+ *
+ * Return: 0 on success, or an error code on failure.
  */
-
-
 int main(void)
 {
-	char *user_input;
+	char *buffer = NULL;
+	size_t bufsize = 0;
+	ssize_t bytes_read;
+	int i;
 
 	while (1)
 	{
-		my_puts("$ ");
+		write(STDOUT_FILENO, "$ ", 1);
+		bytes_read = getline(&buffer, &bufsize, stdin);
+		if (bytes_read == -1)
+		{
+			if (feof(stdin))
+			{
+				write(1, "\n", 1);
+				free(buffer);
+				exit(0);
+			}
+			perror("getline");
+			continue;
+		}
 
-		/* take the input from the user */
-		user_input = _input();
-
-		/* process the command */
-		process_cmd(execve, user_input, NULL, environ);
-		free(user_input);
-
+		if (buffer[bytes_read - 1] == '\n')
+			buffer[bytes_read - 1] = '\0';
+		if (_strcmp(buffer, "exit") == 0)
+		{
+			free(buffer);
+			exit(0);
+		}
+		if (_strcmp(buffer, "env") == 0)
+		{
+			for (i = 0; environ[i] != NULL; i++)
+			{
+				write(STDOUT_FILENO, environ[i], _strlen(environ[i]));
+				write(STDOUT_FILENO, "\n", 1);
+			}
+			continue;
+		}
+		execute_command(buffer);
 	}
-
+	free(buffer);
 	return (0);
 }
