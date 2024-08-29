@@ -19,6 +19,20 @@
 
 int main(void)
 {
+	char *user_input;
+
+	while (1)
+	{
+		my_puts("$ ");
+
+		/* take the input from the user */
+		user_input = _input();
+
+		/* process the command */
+		process_cmd(execve, user_input, NULL, NULL);
+		free(user_input);
+
+	}
 
 	return (0);
 }

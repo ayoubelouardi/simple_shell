@@ -10,12 +10,12 @@
  */
 int _strlen(char *str)
 {
+	int i;
+
 	if (str == NULL)
 		return (-1);
 
-	int i = 0;
-
-	while (str[i] != '\0')
-		i++;
+	for (i = 0; str[i] != '\0'; i++)
+		;
 	return (i);
 }

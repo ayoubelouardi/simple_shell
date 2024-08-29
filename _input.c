@@ -10,7 +10,7 @@
  */
 char *_input(void)
 {
-	char *buff = NULL;
+	char *buff = malloc(sizeof(char) * MAX_BUF_SIZE);
 	size_t bufsize = 0;
 	ssize_t bytes_read;
 
@@ -26,4 +26,3 @@ char *_input(void)
 
 	return (buff);
 }
-

@@ -25,7 +25,7 @@ extern char **environ;
 int my_puts(char *str);
 int _strlen(char *str);
 int process_cmd(func_ptr_t func, const char *, char * const*, char * const*);
-char *_input();
+char *_input(void);
 
 
 #endif
