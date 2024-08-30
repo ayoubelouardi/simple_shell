@@ -14,7 +14,10 @@ int main(void)
 
 	while (1)
 	{
-		write(STDOUT_FILENO, "$ ", 2);
+		if (isatty(STDIN_FILENO))
+		{
+			write(STDOUT_FILENO, "$ ", 2);
+		}
 		bytes_read = getline(&buffer, &bufsize, stdin);
 		if (bytes_read == -1)
 		{
