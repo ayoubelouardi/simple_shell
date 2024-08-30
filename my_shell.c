@@ -27,7 +27,10 @@ int main(void)
 		}
 
 		if (buffer[bytes_read - 1] == '\n')
+		{
 			buffer[bytes_read - 1] = '\0';
+			bytes_read--;
+		}
 		if (_strcmp(buffer, "exit") == 0)
 		{
 			free(buffer);
